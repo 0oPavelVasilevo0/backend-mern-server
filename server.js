@@ -2,24 +2,24 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors');
 const workoutRoutes = require('./routes/workouts')
 const userRoutes = require('./routes/user')
-// const cors = require('cors')
 
 const port = process.env.PORT || 4000
 
-//cors
-// app.use(cors({
-//     origin: ['https://mern-app-client-jade.vercel.app'],
-//     methods: ['POST', 'GET'],
-//     credentials: true
-// }))
+
 
 // express app
 const app = express()
 
 // middleware
 app.use(express.json())
+app.use(cors({
+    origin: 'https://mern-app-client-jade.vercel.app',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}));
 
 app.use((req, res, next) => {
     console.log(req.path, req.method)
